@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `ib_groups_courses` (
 -- ----------------------------
 CREATE TABLE IF NOT EXISTS `ib_courses` (
   `id` int(8) NOT NULL AUTO_INCREMENT,
-  `category_id` int(8) NOT NULL,
+  `category_id` int(8) DEFAULT NULL,
   `title` varchar(200) NOT NULL DEFAULT '',
   `introduction` text,
   `opened` datetime DEFAULT NULL,

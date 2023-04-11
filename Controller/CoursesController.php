@@ -78,21 +78,28 @@ class CoursesController extends AppController
 			'fields' => array('Category.id', 'Category.title'),
 			'order' => array('Category.sort_no' => 'asc')
 		));
+		if(count($category_list) < 1){
+			$category_list[''] = '';
+		}
 		$this->set(compact('category_list'));
 
 		if ($this->action == 'edit' && ! $this->Course->exists($course_id))
 		{
 			throw new NotFoundException(__('Invalid course'));
 		}
-    $course_list = $this->Course->getCourseList();
-    $this->set('course_list', $course_list);
+        $course_list = $this->Course->getCourseList();
+		if(count($course_list) < 1){
+			$course_list[''] = '';
+		}
+        $this->set('course_list', $course_list);
 
-    if($course_id != null){
-      $courseInfo = $this->Course->getCourseInfo($course_id);
-      $selected_before_course = $courseInfo['Course']['before_course'];
-      //$this->log($courseInfo);
-      $this->set('selected_before_course',$selected_before_course);
-    }
+        if($course_id != null){
+			$courseInfo = $this->Course->getCourseInfo($course_id);
+            $selected_before_course = $courseInfo['Course']['before_course'];
+            //$this->log($courseInfo);
+            $this->set('selected_before_course',$selected_before_course);
+        }
+
 		if ($this->request->is(array(
 			'post',
 			'put'
